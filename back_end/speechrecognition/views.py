@@ -26,11 +26,11 @@ def getResult(request):
     with open(pcm_file_path, 'wb') as f:
         f.write(pcm_path)
     try:
-        # 调用科大讯飞语音识别
+        # 调用科大讯飞语音识别, 此处替换为你自己的信息
         client = XunfeiASRClient(
-            app_id="03d6ade0",  
-            api_key="716b862dd448e39e6beb63c81401c892", 
-            api_secret="Yzg2OGJjM2ZkNzJjNzAzYzAyOTAxMjRj"
+            app_id="------",  
+            api_key="------", 
+            api_secret="------"
         )
         result = client.recognize(pcm_file_path, sample_rate=16000)
         return JsonResponse({'code': 0, 'msg': '音频识别成功', 'content': result['text']})
