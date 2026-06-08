@@ -7,12 +7,12 @@ def getRTSResult(breath, sbp, gcs):
     sbp_score = 4 if float(sbp) > 89 else 3 if float(sbp) <= 89 and float(sbp) >= 76 else 2 if float(sbp) >= 75 and float(sbp) <= 50 else 1 if float(sbp) >= 1 and float(sbp) <= 49 else 0
     gcs_score = 4 if float(gcs) >= 13 and float(gcs) <= 15 else 3 if float(gcs) >= 9 and float(gcs) <= 12 else 2 if float(gcs) >= 6 and float(gcs) <= 8 else 1 if float(gcs) >= 4 and float(gcs) <= 5 else 0
     RTS_level = breath_score + sbp_score + gcs_score
-    if RTS_level == 12:
+    if RTS_level <= 12 and RTS_level >= 10:
         return "normal"
-    elif RTS_level == 11:
+    elif RTS_level <= 9 and RTS_level >= 7:
         return "minor injury"
-    elif RTS_level == 10:
+    elif RTS_level <= 6 and RTS_level >= 4:
         return "severe injury"
-    elif RTS_level == 9:
+    elif RTS_level <= 3 and RTS_level >= 0:
         return "extremely severe injury"
-    return RTS_level
+    return 'unknown'
