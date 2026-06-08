@@ -91,7 +91,7 @@ class RespRateCalculator:
         if len(intervals) < 2:
             return None
 
-        # // 再做一次一致性过滤，减少高频噪声导致的乱填
+        # 再做一次一致性过滤，减少高频噪声导致的乱填
         median_interval = float(np.median(intervals))
         tolerance = max(0.18, median_interval * 0.35)
         stable_intervals = intervals[np.abs(intervals - median_interval) <= tolerance]
