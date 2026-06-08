@@ -3,7 +3,7 @@
     <section class="wounded-info-header">
       <!-- Intelligent Triage and Emergency Care System: prehospital -->
       <div class="header-left">
-        <h1 class="header-title">ITECS</h1>
+        <h1 class="header-title">DP-PTE</h1>
         <!-- Time + Location -->
         <div class="time-location">
           <span id="current-time">DateTime: {{ currentTime }}</span>
@@ -36,7 +36,7 @@
         <div class="box-item">
           <div class="h3-wrap">
             <h3>Patient Demographics</h3>
-            <span class="help-icon">?</span>
+            <span class="help-icon" @click="openDemoHelpModal">?</span>
           </div>
           <div class="grid-form">
             <div class="form-item">
@@ -70,7 +70,7 @@
         <div class="box-item">
           <div class="h3-wrap">
             <h3>Vital Signs</h3>
-            <span class="help-icon">?</span>
+            <span class="help-icon" @click="openVitalHelpModal">?</span>
           </div>
           <!-- 生命体征信息 -->
           <div class="grid-form-vital">
@@ -103,7 +103,7 @@
         <div class="box-item">
           <div class="h3-wrap">
             <h3>Neurological Signs (Glasgow Coma Scale)</h3>
-            <span class="help-icon">?</span>  
+            <span class="help-icon" @click="openGCSHelpModal">?</span>  
           </div>
           <div class="grid-form-ns">
             <div class="ns-form-item">
@@ -144,7 +144,7 @@
         <div class="box-item">
           <div class="h3-wrap">
             <h3>Other Information</h3>
-            <span class="help-icon">?</span>  
+            <!-- <span class="help-icon">?</span>   -->
           </div>
           <div class="form-item-other">
             <label>Chest and Abdomen:</label>
@@ -159,10 +159,9 @@
         <div class="box-item">
           <div class="h3-wrap">
             <h3>Intelligent Triage Results</h3>
-            <div class="evaluate-btn-wrap">
-              <button type="button" class="evaluate-btn" @click="startAssessment" style="font-weight:bold;">Start</button>
-              <span class="help-icon">?</span> 
-            </div>
+            <!-- <div class="evaluate-btn-wrap"> -->
+              <!-- <button type="button" class="evaluate-btn" @click="startAssessment" style="font-weight:bold;">Start</button> -->
+            <!-- </div> -->
           </div>
           <!-- 智能分类结果 -->
           <div class="triage-table">
@@ -301,6 +300,92 @@
       </section>
     </main>
   </div>
+<!-- 人口统计学弹窗设计 -->
+<div v-if="DemoHelpModal" class="modal-overlay" @click.self="closeDemoHelpModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h4>Help Information</h4>
+      <button class="close-btn" @click="closeDemoHelpModal">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Patient Demographics includes the patient's basic information:</p>
+      <ul>
+        <li>Patient ID (Unique identifier)</li>
+        <li>Gender</li>
+        <li>Age</li>
+        <li>Blood Type</li>
+      </ul>
+      <p class="tip">Please fill in truthfully and accurately for patient demographics.</p>
+    </div>
+  </div>
+</div>
+<!-- 生命体征弹窗设计 -->
+<div v-if="VitalHelpModal" class="modal-overlay" @click.self="closeVitalHelpModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h4>Help Information</h4>
+      <button class="close-btn" @click="closeVitalHelpModal">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Vital Signs Description:</p>
+      <ul>
+        <li>Heart Rate (HR)</li>
+        <li>Pulse (PUL)</li>
+        <li>Respiratory Rate (RR)</li>
+        <li>Systolic Blood Pressure (SBP)</li>
+        <li>Diastolic Blood Pressure (DBP)</li>
+        <li>Temperature (TEM)</li>
+      </ul>
+      <div class="modal-body-wrapper">
+        <div class="video-section">
+          <p class="video-title"> Vital Signs Operation Demonstration</p>
+          <div class="video-container">
+            <video 
+              class="demo-video" 
+              controls 
+              preload="metadata"
+            >
+              <source 
+                src="http://localhost:8000/media/wounded/video/SensEcho.mp4" 
+                type="video/mp4" 
+              />
+              Your browser does not support video playback.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 格拉斯哥操作方法弹窗设计 -->
+<div v-if="GCSHelpModal" class="modal-overlay" @click.self="closeGCSHelpModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h4>Help Information</h4>
+      <button class="close-btn" @click="closeGCSHelpModal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body-wrapper">
+        <div class="video-section">
+          <p class="video-title"> Glasgow Coma Scale Operation Demonstration</p>
+          <div class="video-container">
+            <video 
+              class="demo-video" 
+              controls 
+              preload="metadata"
+            >
+              <source 
+                src="http://localhost:8000/media/wounded/video/GCS.mp4" 
+                type="video/mp4" 
+              />
+              Your browser does not support video playback.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script setup>
@@ -333,7 +418,38 @@ function getLocation() {
   )
 }
 
-//----------------- 生命体征检测模块 -------------------------
+//------------------------帮助信息弹窗---------------------//
+// 控制弹窗的显示与隐藏
+let DemoHelpModal = ref(false)
+let VitalHelpModal = ref(false)
+let GCSHelpModal = ref(false)
+// 打开人口统计学弹窗
+const openDemoHelpModal = () => {
+  DemoHelpModal.value = true
+}
+// 关闭人口统计学弹窗
+const closeDemoHelpModal = () => {
+  DemoHelpModal.value = false
+}
+// 打开生命体征弹窗
+const openVitalHelpModal = () => {
+  VitalHelpModal.value = true
+}
+// 关闭生命体征弹窗
+const closeVitalHelpModal = () => {
+  VitalHelpModal.value = false
+}
+
+// 打开格拉斯哥弹方法弹窗
+const openGCSHelpModal = () => {
+  GCSHelpModal.value = true
+}
+// 关闭格拉斯哥弹方法弹窗
+const closeGCSHelpModal = () => {
+  GCSHelpModal.value = false
+}
+
+////----------------- 生命体征检测及智能检伤模块 -------------------------
 // 蓝牙状态：disconnected（未连接，灰） / searching（搜索中，橙） / connected（已连接，绿）
 const btStatus = ref('disconnected')
 // 响应式数据
@@ -354,6 +470,22 @@ const updateUI = (data) => {
   diastolicBP.value = data.diastolicPressure || '--'
   temperature.value = data.temperature || '--'
 }
+
+const RTS_res = ref('--')
+const PHI_res = ref('--')
+const CRAMS_res = ref('--')
+const GCS_res = ref('--')
+const ML_res = ref('--_--')
+
+// 更新检伤结果数据
+const updateTriageResult = (data) => {
+  RTS_res.value = data.RTS || '--'
+  PHI_res.value = data.PHI || '--'
+  CRAMS_res.value = data.CRAMS || '--'
+  GCS_res.value = data.GCS || '--'
+  ML_res.value = data.ML || '--_--'
+}
+
 // 获取数据的函数
 const fetchVitalData = async () => {
   try {
@@ -365,6 +497,76 @@ const fetchVitalData = async () => {
     })
     const result = await res.json()
     updateUI(result.data)
+    // 判断此时的检伤条目是否完整
+    let breath = document.getElementById('respiratory-rate').value.trim();
+    if (!breath || breath === '---') {
+      breath = -1
+    }
+    breath=Number(breath)
+    let sysbp = document.getElementById('systolic-blood-pressure').value.trim();
+    if (!sysbp || sysbp === '---') {
+      sysbp = -1
+    }
+    sysbp=Number(sysbp)
+    let gcs_motor = document.getElementById('motor-response-score').value.trim();
+    if (!gcs_motor || gcs_motor === '---') {
+      gcs_motor = -1
+    }
+    gcs_motor=Number(gcs_motor)
+    let gcs_eye = document.getElementById('eye-opening-score').value.trim();
+    if (!gcs_eye || gcs_eye === '---') {
+      gcs_eye = -1
+    }
+    gcs_eye=Number(gcs_eye)
+    let gcs_verbal = document.getElementById('verbal-response-score').value.trim();
+    if (!gcs_verbal || gcs_verbal === '---') {
+      gcs_verbal = -1
+    }
+    gcs_verbal=Number(gcs_verbal)
+    let gcs = -1
+    if (gcs_motor !== -1 && gcs_eye !== -1 && gcs_verbal !== -1) {
+      gcs = parseInt(gcs_motor) + parseInt(gcs_eye) + parseInt(gcs_verbal);
+    }
+    gcs=Number(gcs)
+    let pulse = document.getElementById('pulse').value.trim();
+    if (!pulse || pulse === '--') {
+      pulse = -1
+    }
+    pulse=Number(pulse)
+    let chest = document.getElementById('supplement').value.trim();
+    if (!chest || chest === '--') {
+      chest = -1
+    }
+    chest=Number(chest)
+    let age = document.getElementById('age').value.trim();
+    if (!age || age === '---') {
+      age = -1
+    }
+    age = Number(age)
+    let hr = document.getElementById('heart-rate').value.trim();
+    if (!hr || hr === '--') {
+      hr = -1
+    }
+    hr=Number(hr)
+    let temp = document.getElementById('temperature').value.trim();
+    if (!temp || temp === '--') {
+      temp = -1
+    }
+    temp=Number(temp)
+    // 发送请求给后端
+    const params = {breath, chest, gcs_motor, gcs_verbal, gcs, age, hr, sysbp, temp, pulse}
+    console.log(params)
+    // 请求后端接口
+    const response = await fetch('http://localhost:8000/api/intelligenttriage/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+    });
+    const triage_result = await response.json();
+    console.log('triage_result:', triage_result)
+    updateTriageResult(triage_result.triage_result)
   } catch (error) {
     console.error('获取数据失败:', error)
     // 如果获取数据失败，可以选择停止轮询
@@ -452,84 +654,6 @@ async function switchWounded() {
         location.reload();
       }, 500);
     }
-  }
-}
-// 检伤结果
-const RTS_res = ref('--')
-const PHI_res = ref('--')
-const CRAMS_res = ref('--')
-const GCS_res = ref('--')
-const ML_res = ref('--_--')
-
-// 调用智能检伤分类模型
-async function startAssessment() {
-  document.getElementById('analysisModal').style.display = 'flex';
-  try {
-    // 获取年龄
-    let age = document.getElementById('age').value.trim();
-    // 转换为数字类型
-    age = Number(age)
-    // 校验年龄是否为空
-    if (!age) { alert('Please enter the age.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取心率
-    let hr = document.getElementById('heart-rate').value.trim();
-    // 校验心率是否为空
-    if (!hr || hr === '--') { alert('Please enter the heart rate.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取脉搏
-    let pulse = document.getElementById('pulse').value.trim();
-    // 校验脉搏是否为空
-    if (!pulse || pulse === '--') { alert('Please enter the pulse.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取呼吸率
-    let breath = document.getElementById('respiratory-rate').value.trim();
-    // 校验呼吸率是否为空
-    if (!breath || breath === '--') { alert('Please enter the respiratory rate.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取收缩压
-    let sysbp = document.getElementById('systolic-blood-pressure').value.trim();
-    // 校验收缩压是否为空
-    if (!sysbp || sysbp === '--') { alert('Please enter the systolic blood pressure.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取体温
-    let temp = document.getElementById('temperature').value.trim();
-    // 校验体温是否为空
-    if (!temp || temp === '--') { alert('Please enter the temperature.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取GCS运动项评分
-    let gcs_motor = document.getElementById('motor-response-score').value.trim();
-    // 校验GCS运动项评分是否为空
-    if (!gcs_motor || gcs_motor === '---') { alert('Please enter the GCS motor response score.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取GCS睁眼评分
-    let gcs_eye = document.getElementById('eye-opening-score').value.trim();
-    // 校验GCS睁眼评分是否为空
-    if (!gcs_eye || gcs_eye === '---') { alert('Please enter the GCS eye opening score.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 获取GCS语言评分
-    let gcs_verbal = document.getElementById('verbal-response-score').value.trim();
-    // 校验GCS语言评分是否为空
-    if (!gcs_verbal || gcs_verbal === '---') { alert('Please enter the GCS language score.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    let gcs = gcs_motor + gcs_eye + gcs_verbal
-    //  获取补充信息
-    let chest = document.getElementById('supplement').value.trim();
-    // 校验补充信息是否为空
-    if (!chest || chest === '---') { alert('Please enter the chest information.'); document.getElementById('analysisModal').style.display = 'none'; return;}
-    // 发送请求给后端
-    const params = {breath, chest, gcs_motor, gcs_verbal, gcs, age, hr, sysbp, temp, pulse}
-    // 请求后端接口
-    const response = await fetch('http://localhost:8000/api/intelligenttriage/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(params)
-    });
-    const result = await response.json();
-    console.log(result);
-    document.getElementById('analysisModal').style.display = 'none';
-    // 渲染检伤结果
-    RTS_res.value = result.triage_result.RTS
-    PHI_res.value = result.triage_result.PHI
-    CRAMS_res.value = result.triage_result.CRAMS
-    GCS_res.value = result.triage_result.GCS
-    ML_res.value = result.triage_result.ML
-  } catch (error) {
-      document.getElementById('analysisModal').style.display = 'none';
-      alert('Failed to request assessment. Please check your network and try again.');
   }
 }
 
@@ -640,6 +764,7 @@ onMounted(() => {
   updateTime();
   getLocation();
   setInterval(updateTime, 1000);
+
   //----------------- 拍照摄像功能模块 -------------------------
   const video = document.getElementById('cameraVideo');
   const openCameraBtn = document.querySelector('.img-btn:nth-child(1)');
@@ -867,7 +992,7 @@ async function getAdvice() {
   try {
     // 获取界面输入的内容
     // 伤部信息
-    let description = '请根据我提供的伤员伤情，给出500字以内的院前紧急救治建议。伤员的基本信息为：'
+    let description = '请根据我提供的伤员伤情，给出500字以内的英文院前紧急救治建议。伤员的基本信息为：'
     // 性别
     const gender = document.getElementById('gender').value
     // 如果值不为空，添加到描述中
@@ -1008,9 +1133,141 @@ async function getAdvice() {
     
   }
 }
+
 </script>
 
 <style scoped>
+
+/* 弹窗遮罩 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease;
+}
+
+/* 卡片弹窗（高级质感） */
+.modal-card {
+  width: 420px;
+  max-width: 80vh;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  /* overflow: hidden; */
+  animation: zoomIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body-wrapper {
+  flex: 1;
+  overflow-y: auto; /* 内容多了自动滚动 */
+  padding: 0;
+}
+
+/* 头部 */
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* 关闭按钮 */
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #64748b;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.close-btn:hover {
+  background: #f1f5f9;
+  color: #000;
+}
+
+/* 内容区 */
+.modal-body {
+  padding: 24px;
+  color: #334155;
+  line-height: 1.6;
+  font-size: 15px;
+}
+.modal-body p {
+  margin: 0 0 12px 0;
+}
+.modal-body ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+.modal-body li {
+  margin-bottom: 6px;
+}
+
+/* 提示小字 */
+.tip {
+  color: #4361ee;
+  font-weight: 500;
+  margin-top: 16px !important;
+  font-size: 14px;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 视频区域样式 */
+.video-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.video-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px !important;
+}
+.video-container {
+  width: 100%;
+  height: 220px; /* 固定视频高度*/
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.demo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .triage-system-main {
   height: 100vh;
   background-color:rgb(224, 224, 224);
@@ -1030,7 +1287,7 @@ async function getAdvice() {
 }
 
 .header-title {
-  width: 100px;
+  width: 130px;
   font-size: 2rem;
   font-weight: bold;
   color: #f5f2f2;
