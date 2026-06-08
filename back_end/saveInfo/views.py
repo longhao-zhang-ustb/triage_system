@@ -111,7 +111,6 @@ def save2Neo4j(request):
             CREATE (desc)-[:HAS_CONTENT]->(injuryDesc)
             CREATE (sug)-[:HAS_CONTENT]->(medicalSug)
         """,
-            # 参数完全不用改！
             name=data['wounded_id'],
             location=data['location'],
             datatime=data['DateTime'],
