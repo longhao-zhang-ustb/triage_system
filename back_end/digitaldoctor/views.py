@@ -19,9 +19,10 @@ def getAiSuggestions(request):
         content = [{"type": "text", "text": question}]
         for i in range(len(image_urls)):
             content.append({"type": "image_url", "image_url": image_urls[i]})
-        messages = [{'role': 'user', 'content': content}]    
+        messages = [{'role': 'user', 'content': content}]
+    # 此处替换为你自己的信息
     client = OpenAI(
-        api_key="sk-b039d7bd13de46bb8b8bc29535a0e7eb",
+        api_key="--------",
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     )
     completion = client.chat.completions.create(
