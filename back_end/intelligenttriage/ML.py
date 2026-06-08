@@ -10,14 +10,16 @@ def getMLResult(age, hr, sysbp, temp, gcs):
     sysbp_score = 0 if sysbp >= 100 and sysbp <= 199 else 2 if sysbp >= 200 else 5 if sysbp >= 70 and sysbp <= 99 else 13
     temp_score = 0 if temp < 39 else 3
     gcs_score = 0 if gcs >= 14 and gcs <= 15 else 5 if gcs >= 11 and gcs <= 13 else 7 if gcs >= 9 and gcs <= 10 else 13 if gcs >= 6 and gcs <= 8 else 26
+    # 加载标准化器
+    scaler = joblib.load(r"intelligenttriage\\ML_model\\standard_scaler.pkl")
+    # 对输入参数进行标准化
+    X = scaler.transform([[age_score, hr_score, sysbp_score, temp_score, gcs_score]])
     # 模型预测
-    y_pred = model.predict([[age_score, hr_score, sysbp_score, temp_score, gcs_score]])
-    y_pred_proba = model.predict_proba([[age_score, hr_score, sysbp_score, temp_score, gcs_score]])
+    y_pred = model.predict(X)
+    y_pred_proba = model.predict_proba(X)
     # 解析预测结果
     if y_pred[0] == 0:
-        triage_res = f"<= 1%_{y_pred_proba[0][0]:.2f}"
+        triage_res = f"≤ 10%_{y_pred_proba[0][0]:.2f}"
     elif y_pred[0] == 1:
-        triage_res = f"1% ~ 10%_{y_pred_proba[0][1]:.2f}" 
-    elif y_pred[0] == 2:
-        triage_res = f"> 10%_{y_pred_proba[0][2]:.2f}"
+        triage_res = f"> 10%_{y_pred_proba[0][1]:.2f}"
     return triage_res
