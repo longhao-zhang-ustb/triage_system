@@ -12,7 +12,7 @@
 - injury_data: 伤情数据（JSON 格式）
 - score_data: 评分数据（JSON 格式）
 - vital_data: 生命体征数据（JSON 格式）
-- suggestion (int): 转归后送选择（0：位置，1：收容，2：转归）
+- suggestion (int): 转归后送选择
 
 ### injury_data 详细子结构
 ```json
@@ -20,7 +20,7 @@
   "injuries": [
     // 多个 string 代表部位名称
   ],
-  "is_battle_injury": "boolean", // 是否为战伤
+  "is_battle_injury": "boolean",
 }
 ```
 
