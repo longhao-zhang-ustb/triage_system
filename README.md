@@ -1,4 +1,4 @@
-# DP-PTE---Digital Physician Software for Pre-Hospital Triage and Emergency Care
+# DP-PTE: Digital Physician Software for Pre-Hospital Triage and Emergency Care
 > This software provides a rapid triage and rescue platform designed for disaster sites and other scenes of mass casualty incidents, offering core functionalities such as rapid casualty detection, intelligent triage classification, and the generation of emergency medical recommendations.
 
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/longhao-zhang-ustb/triage_system)
