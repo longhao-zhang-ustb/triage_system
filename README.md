@@ -32,3 +32,14 @@
 - 包括numpy=2.2.6, openai=2.37.0, pandas=2.3.3, requests=2.33.1, scikit-learn=1.7.2, scipy=1.15.3, xgboost=3.2.0, websocket=0.2.1
 - 编程语言工具等包括HTML, CSS, JavaScript, Python, Visual Studio Code, Vue, Django, Neo4j
 
+## 配置说明
+- Web端依赖的安装`npm install package_name`, 服务端为`pip install module_name`, 通过上述指令完成相关依赖的配置
+- 前端运行指令为`npm run dev`
+- 服务端运行指令为`python manage.py runserver`
+- 数据库启动指令`neo4j.bat console`
+
+## 开源许可
+本项目基于 **Apache License 2.0** 开源。
+
+## 联系方式
+如有任何问题，随时欢迎与我们联系
