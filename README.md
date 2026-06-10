@@ -5,8 +5,7 @@
 [![构建状态](https://img.shields.io/badge/Build-Passing-brightgreen)](https://img.shields.io/badge/Build-Passing-brightgreen))
 [![许可证](https://img.shields.io/badge/License-Apache--2.0-green))](LICENSE)
 
-<!-- 项目截图/动图/演示链接（可选，UI类软件必加） -->
-![软件主界面](docs/screenshot.png)
+![软件主界面](front_end/src/assets/Intelligent_Triage_and_Emergency_Care_System.png)
 <p align="center">软件演示动图（GIF）</p>
 
 ## 📑 目录
