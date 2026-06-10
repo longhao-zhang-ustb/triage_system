@@ -1,11 +1,9 @@
 # DP-PTE 一种用于院前检伤急救的数字医生软件
 > 本软件提供了一种面向自然灾害等伤亡现场的快速检伤救援平台，实现了快速伤情感知、智能化检伤分类和紧急医疗建议的生成等核心功能
 
-[![版本](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/xxx/xxx)
-[![构建状态](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com/xxx/xxx/actions)
-[![许可证](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![下载量](https://img.shields.io/badge/Download-10k+-orange)
-[![Star](https://img.shields.io/github/stars/xxx/xxx?style=social)](https://github.com/xxx/xxx)
+[![版本](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/longhao-zhang-ustb/triage_system)
+[![构建状态](https://img.shields.io/badge/Build-Passing-brightgreen)](https://img.shields.io/badge/Build-Passing-brightgreen))
+[![许可证](https://img.shields.io/badge/License-Apache--2.0-green))](LICENSE)
 
 <!-- 项目截图/动图/演示链接（可选，UI类软件必加） -->
 ![软件主界面](docs/screenshot.png)
