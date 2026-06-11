@@ -22,7 +22,7 @@ This software is a web application designed specifically for pre-hospital emerge
 - Feature 1: Provides a wireless communication interface for wearable devices, supporting the dynamic acquisition of multi-dimensional vital signs, including heart rate, respiratory rate, pulse, blood pressure, and body temperature
 - Feature 2: Supports quick recording of various types of injury data, provides an injury image capture function, and offers a voice recognition interface
 - Feature 3: Supports intelligent calculation of traditional medical scales such as RTS, CRAMS, PHI, and GCS, as well as mortality rate calculation based on the XGBOOST model
-- Feature 4: Supports the generation of emergency response strategies based on large language models
+- Feature 4: Supports the generation of emergency response strategies based on large models
 - Feature 5: Supports the storage of on-site injury data and other content, and provides Neo4j graph database storage functionality
 
 ## 🧰 Dependencies
