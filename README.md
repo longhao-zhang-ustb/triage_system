@@ -29,6 +29,7 @@ This software is a web application designed specifically for pre-hospital emerge
 - We recommend using the Chrome browser
 - Includes numpy=2.2.6, openai=2.37.0, pandas=2.3.3, requests=2.33.1, scikit-learn=1.7.2, scipy=1.15.3, xgboost=3.2.0, websocket=0.2.1
 - Programming language tools and others include HTML, CSS, JavaScript, Python, Visual Studio Code, Vue, Django, and Neo4j
+- In a development environment, Node.js is required to run web applications, and a Java environment is required to run graph databases.
 
 ## 🤖 Configuration
 - To install dependencies for the web frontend, use `npm install package_name`; for the backend, use `pip install module_name`. Use these commands to configure the relevant dependencies.
